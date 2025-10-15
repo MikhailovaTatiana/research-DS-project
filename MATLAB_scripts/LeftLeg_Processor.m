@@ -112,7 +112,7 @@ for i = 1:length(PARTICIPANTS)
 
             t_traverse = tic;
             % --- Explicit nested traversal (avoids extra looping) ---
-            % RightFoot_GaitCycle_Data -> Level_Ground -> Walking -> Self_Selected_Speed
+            % LeftFoot_GaitCycle_Data -> Level_Ground -> Walking -> Self_Selected_Speed
             temp_struct = current_struct;
             if ~isfield(temp_struct, 'Level_Ground')
                 fprintf('  missing field: Level_Ground\n');
@@ -266,7 +266,7 @@ for i = 1:length(PARTICIPANTS)
 
         if isempty(EMG_data_cells)
             fprintf('  ❗ No EMG segments extracted. Check printed missing-field breadcrumbs above.\n');
-            error('No Right Leg data found.');
+            error('No Left Leg data found.');
         end
 
         % Build per-segment merged tables (horizontal) with Participant/Gender
@@ -291,7 +291,7 @@ for i = 1:length(PARTICIPANTS)
 
         % Concatenate all segments vertically for this participant
         T_participant = vertcat(all_segment_tables{:});
-        T_participant.Leg = repmat(string('Right'), height(T_participant), 1);
+        T_participant.Leg = repmat(string('Left'), height(T_participant), 1);
         all_data_tables{end+1} = T_participant;
 
     catch ME
